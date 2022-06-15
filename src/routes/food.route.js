@@ -29,14 +29,22 @@ async function addFood(req, res) {
 }
 async function updateFood(req, res) {
   let food_Id = parseInt(req.params.id);
+  console.log("food ID = ",food_Id);
   let updateFood = req.body;
+  console.log("update Food = ",updateFood);
   let foundFood = await foodTable.read(food_Id);
+  console.log("found food", foundFood);
   if (foundFood) {
-    let updatedFood = await foodTable .update(updateFood);
+    console.log("inside IF");
+    let updatedFood = await foundFood.update(updateFood);
+    
+    console.log("updat food ", updatedFood);
     res.status(201).json(updatedFood);
   } else {
+    console.log("inside else");
     res.status(404).json({ message: 'Not found' });
   }
+  console.log("finshid");
 }
 async function deleteFood(req, res) {
   let food_Id = parseInt(req.params.id);

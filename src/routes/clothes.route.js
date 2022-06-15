@@ -32,7 +32,7 @@ async function updateClothe(req, res) {
   let updateClothe = req.body;
   let foundClothe = await clothesTable.read(clothe_Id);
   if (foundClothe) {
-    let updatedClothe = await clothesTable.update(updateClothe);
+    let updatedClothe = await foundClothe.update(updateClothe);
     res.status(201).json(updatedClothe);
   } else {
     res.status(404).json({ message:'Not found' });
